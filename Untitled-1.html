@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karengera Fred — Software Engineer</title>
+<meta name="description" content="Karengera Fred — Software Engineering student at AUCA, Kigali. Open to freelance and internships.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e0c;
+    --bg-alt: #161614;
+    --card: #1c1c19;
+    --text: #f5f3ee;
+    --muted: #9a978e;
+    --border: #2a2a26;
+    --accent: #e8a33d;
+    --accent-soft: rgba(232, 163, 61, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    font-size: 16px;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Grain texture */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 0;
+    background: rgba(14, 14, 12, 0.72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+
+  nav.scrolled { border-bottom-color: var(--border); }
+
+  nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent); }
+
+  .nav-links { display: flex; gap: 28px; }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  @media (max-width: 640px) { .nav-links { display: none; } }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 180px 0 120px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+
+  .hero-eyebrow::before {
+    content: "";
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 12px #4ade80;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    margin-bottom: 28px;
+    background: linear-gradient(180deg, var(--text) 40%, #b8b4a8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+    -webkit-text-fill-color: var(--accent);
+  }
+
+  .hero-desc {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 44px;
+  }
+
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 14px 26px;
+    border-radius: 100px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #1a1206;
+  }
+
+  .btn-primary:hover {
+    background: #f0b355;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(232, 163, 61, 0.25);
+  }
+
+  .btn-ghost {
+    color: var(--text);
+    border-color: var(--border);
+  }
+
+  .btn-ghost:hover {
+    background: var(--bg-alt);
+    border-color: var(--muted);
+  }
+
+  .btn svg { width: 15px; height: 15px; }
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---------- SECTION ---------- */
+  section {
+    padding: 110px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 56px;
+  }
+
+  .section-num {
+    font-family: 'Fraunces', serif;
+    font-size: 0.9rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+
+  .section-sub {
+    color: var(--muted);
+    margin-bottom: 48px;
+    max-width: 560px;
+    font-size: 1.02rem;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .about-grid p {
+    color: var(--muted);
+    margin-bottom: 20px;
+    font-size: 1rem;
+  }
+
+  .about-grid p strong { color: var(--text); font-weight: 500; }
+
+  .now-card {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+  }
+
+  .now-card h4 {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  .now-item {
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: 0.92rem;
+    color: var(--muted);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .now-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .now-item:first-of-type { padding-top: 0; }
+
+  .now-item::before {
+    content: "";
+    flex-shrink: 0;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 9px;
+  }
+
+  @media (max-width: 720px) {
+    .about-grid { grid-template-columns: 1fr; gap: 36px; }
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skill-block { margin-bottom: 40px; }
+
+  .skill-block h4 {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 9px; }
+
+  .chip {
+    font-size: 0.85rem;
+    color: var(--text);
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 7px 15px;
+    border-radius: 100px;
+    transition: all 0.2s ease;
+    cursor: default;
+  }
+
+  .chip:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .project {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .project::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .project:hover {
+    border-color: #3a3a34;
+    transform: translateY(-3px);
+  }
+
+  .project:hover::before { opacity: 1; }
+
+  .project-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .project h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+
+  .project p {
+    color: var(--muted);
+    font-size: 0.98rem;
+    margin-bottom: 24px;
+    max-width: 620px;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .tech {
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .tech:not(:last-child)::after {
+    content: " ·";
+    margin-left: 8px;
+    color: var(--border);
+  }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline {
+    position: relative;
+    padding-left: 40px;
+  }
+
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 48px;
+  }
+
+  .tl-item:last-child { margin-bottom: 0; }
+
+  .tl-item::before {
+    content: "";
+    position: absolute;
+    left: -37px;
+    top: 8px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    transition: all 0.3s ease;
+  }
+
+  .tl-item:hover::before {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 5px var(--accent-soft);
+  }
+
+  .tl-date {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .tl-item h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+
+  .tl-org {
+    font-size: 0.92rem;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .tl-item ul {
+    list-style: none;
+    margin-top: 12px;
+  }
+
+  .tl-item li {
+    font-size: 0.92rem;
+    color: var(--muted);
+    padding-left: 18px;
+    position: relative;
+    margin-bottom: 6px;
+  }
+
+  .tl-item li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    opacity: 0.6;
+  }
+
+  .tl-item p {
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+
+  /* ---------- LANGUAGES ---------- */
+  .lang-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .lang-card {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+    transition: border-color 0.25s ease;
+  }
+
+  .lang-card:hover { border-color: var(--accent); }
+
+  .lang-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .lang-level {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-cta {
+    text-align: center;
+    padding: 60px 0 20px;
+  }
+
+  .contact-cta h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    margin-bottom: 24px;
+  }
+
+  .contact-cta h2 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .contact-cta p {
+    color: var(--muted);
+    max-width: 460px;
+    margin: 0 auto 40px;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    padding: 40px 0 60px;
+    border-top: 1px solid var(--border);
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  footer a {
+    color: var(--muted);
+    text-decoration: none;
+    margin-left: 18px;
+  }
+
+  footer a:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .hero { padding: 140px 0 80px; }
+    section { padding: 80px 0; }
+    .project { padding: 28px; }
+    .project h3 { font-size: 1.35rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="container">
+    <a class="logo" href="#top">Karengera<span>.</span></a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#work">Work</a>
+      <a href="#path">Path</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="container">
+    <div class="hero-eyebrow">Available for work · Kigali, Rwanda</div>
+    <h1>Software engineer<br>building <em>real</em> things<br>that matter.</h1>
+    <p class="hero-desc">Software Engineering student at AUCA with hands-on 
+    experience in development, technical support, and retail operations. 
+    I turn problems into clean, working software.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="Freds-CV.pdf" download>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16"/>
+        </svg>
+        Download CV
+      </a>
+      <a class="btn btn-ghost" href="#contact">Get in touch</a>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-num">01</div>
+      <h2 class="section-title">About</h2>
+    </div>
+
+    <div class="about-grid">
+      <div class="reveal">
+        <p>I'm <strong>Karengera Fred</strong> — an enthusiastic, self-motivated, 
+        and reliable Software Engineering student at the Adventist University of 
+        Central Africa (AUCA). I work well both in teams and independently, adapt 
+        to challenging situations, and deliver under pressure with strict deadlines.</p>
+        <p>Alongside my studies, I've gained real-world experience in engineering 
+        and retail supervision — building web applications, solving database 
+        problems, and managing product distribution for a major consumer brand.</p>
+      </div>
+
+      <div class="now-card reveal">
+        <h4>Currently</h4>
+        <div class="now-item">Studying Software Engineering at AUCA (2024 – Present)</div>
+        <div class="now-item">Building the Blue Band Management System</div>
+        <div class="now-item">Open to freelance &amp; internship work</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-num">02</div>
+      <h2 class="section-title">Skills</h2>
+    </div>
+
+    <div class="skill-block reveal">
+      <h4>Programming</h4>
+      <div class="chips">
+        <span class="chip">Java</span>
+        <span class="chip">HTML / CSS</span>
+        <span class="chip">JavaScript</span>
+        <span class="chip">Python</span>
+      </div>
+    </div>
+
+    <div class="skill-block reveal">
+      <h4>Frameworks &amp; Tools</h4>
+      <div class="chips">
+        <span class="chip">React (Vite)</span>
+        <span class="chip">Spring Boot</span>
+        <span class="chip">MySQL</span>
+        <span class="chip">Docker</span>
+        <span class="chip">Git / GitHub</span>
+      </div>
+    </div>
+
+    <div class="skill-block reveal">
+      <h4>Professional</h4>
+      <div class="chips">
+        <span class="chip">Team Collaboration</span>
+        <span class="chip">Leadership</span>
+        <span class="chip">Communication</span>
+        <span class="chip">Innovation</span>
+        <span class="chip">Technical Competence</span>
+      </div>
+    </div>
+
+    <div class="skill-block reveal">
+      <h4>Certificates</h4>
+      <div class="chips">
+        <span class="chip">Nocodemy IT Certificate</span>
+        <span class="chip">Netops IT Certificate</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="work">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-num">03</div>
+      <h2 class="section-title">Selected Work</h2>
+    </div>
+
+    <div class="project reveal">
+      <div class="project-tag">Featured Project</div>
+      <h3>Blue Band Management System</h3>
+      <p>A centralized digital platform that automates inventory tracking, sales 
+      distribution, and supply chain operations — replacing manual record-keeping 
+      with real-time visibility and analytics.</p>
+      <div class="project-tech">
+        <span class="tech">React (Vite)</span>
+        <span class="tech">Spring Boot</span>
+        <span class="tech">Java JDK 17</span>
+        <span class="tech">MySQL</span>
+        <span class="tech">Docker</span>
+        <span class="tech">Git/GitHub</span>
+      </div>
+    </div>
+
+    <div class="project reveal">
+      <div class="project-tag">Coming Soon</div>
+      <h3>Your Second Project</h3>
+      <p>A short one-sentence description of what this project does and who 
+      it helps.</p>
+      <div class="project-tech">
+        <span class="tech">Tech</span>
+        <span class="tech">Tech</span>
+        <span class="tech">Tech</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BACKGROUND -->
+<section id="path">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-num">04</div>
+      <h2 class="section-title">The Path So Far</h2>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-date">2024 – Present</div>
+        <h3>Bachelor's in Software Engineering</h3>
+        <div class="tl-org">Adventist University of Central Africa (AUCA)</div>
+        <p>Coursework: Object-Oriented Programming, Data Structures &amp; Algorithms, 
+        Database Systems, Software Project Management, and Web Development.</p>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">2024 – 2025</div>
+        <h3>Merchandiser Supervisor</h3>
+        <div class="tl-org">ERI Rwanda · Blue Band</div>
+        <ul>
+          <li>Supervised product merchandising and in-store placement.</li>
+          <li>Coordinated with retail outlets on stock visibility &amp; brand standards.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">2022 – 2024</div>
+        <h3>Junior Engineer</h3>
+        <div class="tl-org">Sureways Solutions Ltd</div>
+        <ul>
+          <li>Assisted with technical support and software-related tasks.</li>
+          <li>Collaborated with the engineering team on client solutions.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">2019 – 2022</div>
+        <h3>Advanced Level</h3>
+        <div class="tl-org">Lycée De Kigali (LDK)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section id="languages">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-num">05</div>
+      <h2 class="section-title">Languages</h2>
+    </div>
+
+    <div class="lang-grid">
+      <div class="lang-card reveal">
+        <div class="lang-name">English</div>
+        <div class="lang-level">Excellent — Writing · Speaking · Listening</div>
+      </div>
+      <div class="lang-card reveal">
+        <div class="lang-name">Kinyarwanda</div>
+        <div class="lang-level">Excellent — Writing · Speaking · Listening</div>
+      </div>
+      <div class="lang-card reveal">
+        <div class="lang-name">Swahili</div>
+        <div class="lang-level">Fair — Writing · Speaking · Good — Listening</div>
+      </div>
+      <div class="lang-card reveal">
+        <div class="lang-name">French</div>
+        <div class="lang-level">Fair — Writing · Speaking · Listening</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-cta reveal">
+      <h2>Let's build something<br><em>worth shipping.</em></h2>
+      <p>Available for freelance projects, internships, and collaborations. 
+      The fastest way to reach me is email or phone.</p>
+      <div class="contact-links">
+        <a class="btn btn-primary" href="mailto:karenfred00@gmail.com">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M4 6h16a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1z"/>
+          </svg>
+          Email me
+        </a>
+        <a class="btn btn-ghost" href="tel:+250784243435">+250 784 243 435</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div>© 2025 Karengera Fred · Kigali, Rwanda</div>
+    <div>
+      <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
+      <a href="Freds-CV.pdf" download>CV</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav border on scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Scroll-reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
